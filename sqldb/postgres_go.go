@@ -36,7 +36,9 @@ func SaveMinusSkills(skills []Skill) {
 	db := connect_to_postgres()
 	defer db.Close()
 	_, err := db.Exec(createInsertQuery(skills))
-	checkErr(err)
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 
 func createInsertQuery(skills []Skill) string {
