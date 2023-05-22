@@ -22,6 +22,21 @@ func connect_to_mysql() *sql.DB {
 	return db
 }
 
+// Будем использовать для того, чтобы сравнивать эти навыки с необработанными навыками
+func GetMinusSkillsFromMysql() (skills []string) {
+	db := connect_to_mysql()
+	defer db.Close()
+	results, err := db.Query("SELECT name FROM demand WHERE is_displayed = 0")
+	checkErr(err)
+	for results.Next() {
+		var name string
+		err = results.Scan(&name)
+		skills = append(skills, name)
+		checkErr(err)
+	}
+	return
+}
+
 func GetNoneSkills() (skills []Skill) {
 	db := connect_to_mysql()
 	defer db.Close()

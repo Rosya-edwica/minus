@@ -15,7 +15,8 @@ func connect_to_postgres() *sql.DB {
 	return db
 }
 
-func GetMinusSkills() (skills []string) {
+// Здесь хранится основная база минусов слов. Сравниваем хранилище минус слов с необработанными навыками
+func GetMinusSkillsFromPostgres() (skills []string) {
 	db := connect_to_postgres()
 	rows, err := db.Query("SELECT name FROM minus_skill")
 	checkErr(err)

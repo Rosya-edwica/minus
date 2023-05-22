@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	minusSkills := sqldb.GetMinusSkills()
+	minusSkills := sqldb.GetMinusSkillsFromMysql()
 	noneSkills := sqldb.GetNoneSkills()
 
 	var duplicates []sqldb.Skill
